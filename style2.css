@@ -1,0 +1,75 @@
+body {
+    background-image: url("assets/images/welcome-hero/banner.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 300px; /* Adjust the width as needed */
+    margin: 100px auto 0;
+    color: white;
+    background: #5F9EA0;
+    text-align: center;
+    border: 1px solid #B0C4DE;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+    padding: 20px; 
+}
+
+form {
+    width: 100%; /* Make the form full width */
+    margin-top: 20px; /* Add space between container and form */
+    padding: 20px;
+    border-radius: 0 0 10px 10px;
+}
+
+.container label {
+    display: block;
+    margin-bottom: 10px; /* Increase spacing between labels */
+    text-align: left; /* Align labels to the left */
+}
+
+.container input[type="text"],
+.container input[type="email"],
+.container input[type="password"] {
+    width: calc(100% - 22px);
+    padding: 8px;
+    margin-bottom: 15px; /* Increase spacing between inputs */
+}
+
+input[type="checkbox"] {
+    margin-right: 5px; /* Adjust checkbox spacing */
+}
+
+.btn {
+    width: 100%; /* Make the button full width */
+    padding: 10px;
+    font-size: 15px;
+    color: white;
+    background: #5F9EA0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px; /* Add space above the button */
+}
+
+.btn:hover {
+    background: #4682B4; /* Change button color on hover */
+}
+
+p {
+    text-align: center;
+    margin-top: 20px;
+    color: white;
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    text-decoration: underline;
+}
