@@ -11,7 +11,7 @@
             <label for="email"><b>Email:</b></label>
             <input type="text" placeholder="Enter email id" name="email" required><br>
             <label for="psw"><b>Password:</b></5label>
-            <input type="password" placeholder="Enter Password" name="psw" required minlength="8"><br>
+            <input type="password" placeholder="Enter Password" name="psw" required minlength="8" style="color:red;" ><br>
             <label for="cpsw"><b>Confirm Password:</b></label>
             <input type="password" placeholder="Confirm Password" name="cpsw" required><br>
             <label>

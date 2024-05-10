@@ -10,10 +10,10 @@ body {
 .container {
     width: 300px; /* Adjust the width as needed */
     margin: 100px auto 0;
-    color: white;
-    background: #5F9EA0;
+    color: #598aca;
+    background: transparent;
     text-align: center;
-    border: 1px solid #B0C4DE;
+    /* border: 1px solid #B0C4DE; */
     border-bottom: none;
     border-radius: 10px 10px 0 0;
     padding: 20px; 
@@ -57,7 +57,7 @@ input[type="checkbox"] {
 }
 
 .btn:hover {
-    background: #4682B4; /* Change button color on hover */
+    background: #75b4e7; /* Change button color on hover */
 }
 
 p {

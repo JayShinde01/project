@@ -3,6 +3,16 @@
 <html class="no-js" lang="en">
 
     <head>
+	<?php
+					session_start();
+if(isset($_SESSION['views']))
+$_SESSION['views'] = $_SESSION['views']+1;
+
+
+else
+$_SESSION['views']=1;
+
+?>
         <!-- meta data -->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -161,9 +171,13 @@
 							<form action="index.html">
 								<input type="text" placeholder="Ex: palce, resturent, food, automobile" />
 							</form>
-							<div class="welcome-hero-form-icon">
-								<i class="flaticon-list-with-dots"></i>
-							</div>
+							<select name="DoBmonth">
+	      <option></option>
+		  <option value ="January"> January </option>
+		  <option value ="February"> February </option>
+		  <option value ="March"> March </option>
+		  <option value ="April"> April </option>
+	 </select>
 						</div>
 						<div class="single-welcome-hero-form">
 							<h3>location</h3>
@@ -951,11 +965,12 @@
 					<div class="col-md-3 col-sm-6">
 						<div class="single-ststistics-box">
 							<div class="statistics-content">
-								<div class="counter">65</div> <span>k+</span>
+								<div class="counter"><?php echo $_SESSION['views']; ?></div> <span>k+</span>
 							</div><!--/.statistics-content-->
 							<h3>visitors</h3>
 						</div><!--/.single-ststistics-box-->
 					</div><!--/.col-->
+					
 					<div class="col-md-3 col-sm-6">
 						<div class="single-ststistics-box">
 							<div class="statistics-content">
