@@ -10,13 +10,15 @@ body {
 .container {
     width: 300px; /* Adjust the width as needed */
     margin: 100px auto 0;
-    color: #598aca;
+    color: #010b0b;
     background: transparent;
     text-align: center;
     /* border: 1px solid #B0C4DE; */
     border-bottom: none;
     border-radius: 10px 10px 0 0;
     padding: 20px; 
+    z-index: #bae5e5;
+
 }
 
 form {

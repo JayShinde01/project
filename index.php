@@ -4,15 +4,37 @@
 
     <head>
 	<?php
-					session_start();
-if(isset($_SESSION['views']))
-$_SESSION['views'] = $_SESSION['views']+1;
+session_start();
+// Database connection
+$con = mysqli_connect("localhost", "root", "", "details");
+if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// Check if the visitor count is already stored in the database
+$query = "SELECT count FROM visitor_count WHERE id = 1";
+$result = mysqli_query($con, $query);
+
+if (mysqli_num_rows($result) > 0) {
+    // If count exists, fetch it and increment by 1
+    $row = mysqli_fetch_assoc($result);
+    $count = $row['count'] + 1;
+    // Update the count in the database
+    $update_query = "UPDATE visitor_count SET count = $count WHERE id = 1";
+    mysqli_query($con, $update_query);
+} else {
+    // If count doesn't exist, insert count as 1 into the database
+    $insert_query = "INSERT INTO visitor_count (count) VALUES (1)";
+    mysqli_query($con, $insert_query);
+    $count = 1;
+}
 
 
-else
-$_SESSION['views']=1;
 
+// Close the database connection
+mysqli_close($con);
 ?>
+
         <!-- meta data -->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -138,12 +160,12 @@ $_SESSION['views']=1;
 			            <!-- Collect the nav links, forms, and other content for toggling -->
 			            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
 			                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-			                    <li class=" scroll active"><a href="#home">home</a></li>
-			                    <li class="scroll"><a href="#works">how it works</a></li>
-			                    <li class="scroll"><a href="#explore">explore</a></li>
-			                    <li class="scroll"><a href="#reviews">review</a></li>
-			                    <li class="scroll"><a href="#blog">blog</a></li>
-			                    <li class="scroll"><a href="#contact">contact</a></li>
+			                    <li class=" scroll active"><a href="home">home</a></li>
+			                    <li class="scroll"><a href="works">how it works</a></li>
+			                    <li class="scroll"><a href="explore">explore</a></li>
+			                    <li class="scroll"><a href="reviews">review</a></li>
+			                    <li class="scroll"><a href="blog">blog</a></li>
+			                    <li class="scroll"><a href="contact">contact</a></li>
 			                </ul><!--/.nav -->
 			            </div><!-- /.navbar-collapse -->
 			        </div><!--/.container-->
@@ -157,48 +179,57 @@ $_SESSION['views']=1;
 
 		<!--welcome-hero start -->
 		<section id="home" class="welcome-hero">
-			<div class="container">
-				<div class="welcome-hero-txt">
-					<h2>best place to find and explore <br> that all you need </h2>
-					<p>
-						Find Best Place, Restaurant, Hotel, Real State and many more think in just One click 
-					</p>
-				</div>
-				<div class="welcome-hero-serch-box">
-					<div class="welcome-hero-form">
-						<div class="single-welcome-hero-form">
-							<h3>what?</h3>
-							<form action="index.html">
-								<input type="text" placeholder="Ex: palce, resturent, food, automobile" />
-							</form>
-							<select name="DoBmonth">
-	      <option></option>
-		  <option value ="January"> January </option>
-		  <option value ="February"> February </option>
-		  <option value ="March"> March </option>
-		  <option value ="April"> April </option>
-	 </select>
-						</div>
-						<div class="single-welcome-hero-form">
-							<h3>location</h3>
-							<form method="POST" action="hotelName.php">
-								<input type="text"  name="location" placeholder="Ex: london, newyork, rome" />
-							
-							<div class="welcome-hero-form-icon">
-								<i class="flaticon-gps-fixed-indicator"></i>
-							</div>
-						</div>
-					</div>
-					<div class="welcome-hero-serch">
-						<button class="welcome-hero-btn" onclick="window.location.href='hotelName.php'">
-							 search  <i data-feather="search"></i> 
-						</button>
-						</form>
-					</div>
-				</div>
-			</div>
+    <div class="container">
+        <div class="welcome-hero-txt">
+            <h2>best place to find and explore <br> that all you need </h2>
+            <p>
+                Find Best Place,  Hotel, Real State and many more things in just One click 
+            </p>
+        </div>
+        <div class="welcome-hero-serch-box">
+            <div class="welcome-hero-form">
+                <div class="single-welcome-hero-form">
+                    <h3>what?</h3>
+                    <input type="text" placeholder="Ex: place, restaurant, food, automobile" />
+                    <select id="category" name="category" onchange="updateFormAction()">
+                        <option value="">Select</option>
+                        <option value="hotelName.php">Hotels</option>
+                        <option value="automobile.php">Automobile</option>
+                        <option value="place.php">Place</option>
+                        <option value="healthCare.php">HealthCare</option>
+                    </select>
+                </div>
+                <div class="single-welcome-hero-form">
+                    <h3>location</h3>
+                    <form id="searchForm" method="POST" action="">
+                        <input type="text" name="location" placeholder="Ex: London, New York, Rome" />
+                        <div class="welcome-hero-form-icon">
+                            <i class="flaticon-gps-fixed-indicator"></i>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="welcome-hero-serch">
+                <button class="welcome-hero-btn" onclick="submitForm()">
+                    search  <i data-feather="search"></i> 
+                </button>
+            </div>
+        </div>
+    </div>
+</section><!--/.welcome-hero-->
 
-		</section><!--/.welcome-hero-->
+<script>
+function updateFormAction() {
+    var category = document.getElementById('category').value;
+    document.getElementById('searchForm').action = category;
+}
+
+function submitForm() {
+    var form = document.getElementById('searchForm');
+    form.submit();
+}
+</script>
+
 		<!--welcome-hero end -->
 
 		<!--list-topics start -->
@@ -211,7 +242,7 @@ $_SESSION['views']=1;
 								<div class="single-list-topics-icon">
 									<i class="flaticon-restaurant"></i>
 								</div>
-								<h2><a href="#">resturent</a></h2>
+								<h2><a href="all_hotels.php">resturent</a></h2>
 								<p>150 listings</p>
 							</div>
 						</li>
@@ -220,7 +251,7 @@ $_SESSION['views']=1;
 								<div class="single-list-topics-icon">
 									<i class="flaticon-travel"></i>
 								</div>
-								<h2><a href="#">destination</a></h2>
+								<h2><a href="all_places.php">destination</a></h2>
 								<p>214 listings</p>
 							</div>
 						</li>
@@ -229,7 +260,7 @@ $_SESSION['views']=1;
 								<div class="single-list-topics-icon">
 									<i class="flaticon-building"></i>
 								</div>
-								<h2><a href="#">hotels</a></h2>
+								<h2><a href="all_hotels.php">hotels</a></h2>
 								<p>185 listings</p>
 							</div>
 						</li>
@@ -238,7 +269,7 @@ $_SESSION['views']=1;
 								<div class="single-list-topics-icon">
 									<i class="flaticon-pills"></i>
 								</div>
-								<h2><a href="#">healthcaree</a></h2>
+								<h2><a href="all_medicals.php">healthcaree</a></h2>
 								<p>200 listings</p>
 							</div>
 						</li>
@@ -247,7 +278,7 @@ $_SESSION['views']=1;
 								<div class="single-list-topics-icon">
 									<i class="flaticon-transport"></i>
 								</div>
-								<h2><a href="#">automotion</a></h2>
+								<h2><a href="all_automobiles.php">automotion</a></h2>
 								<p>120 listings</p>
 							</div>
 						</li>
@@ -965,7 +996,7 @@ $_SESSION['views']=1;
 					<div class="col-md-3 col-sm-6">
 						<div class="single-ststistics-box">
 							<div class="statistics-content">
-								<div class="counter"><?php echo $_SESSION['views']; ?></div> <span>k+</span>
+								<div class="counter"><?php echo $count; ?></div> <span>+</span>
 							</div><!--/.statistics-content-->
 							<h3>visitors</h3>
 						</div><!--/.single-ststistics-box-->

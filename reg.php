@@ -10,8 +10,8 @@
             <input type="text" placeholder="Enter username" name="uname" required><br>
             <label for="email"><b>Email:</b></label>
             <input type="text" placeholder="Enter email id" name="email" required><br>
-            <label for="psw"><b>Password:</b></5label>
-            <input type="password" placeholder="Enter Password" name="psw" required minlength="8" style="color:red;" ><br>
+            <label for="psw" style="color:white;"><b>Password:</b></5label>
+            <input type="password" placeholder="Enter Password" name="psw" required minlength="8"  ><br>
             <label for="cpsw"><b>Confirm Password:</b></label>
             <input type="password" placeholder="Confirm Password" name="cpsw" required><br>
             <label>
@@ -71,7 +71,7 @@ function add() {
         $r="SELECT * FROM data";
         $result=mysqli_query($con,$r);
         $row = mysqli_fetch_array($result);
-        if($row['username']==$UserName){
+        if($row['username'] == $UserName){
             echo "<script type='text/javascript'>alert('UserName Already Exist Try another One');</script>";
 		
         }
