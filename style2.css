@@ -55,11 +55,11 @@ input[type="checkbox"] {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 15px; /* Add space above the button */
+    margin-top: 25px; /* Add space above the button */
 }
 
 .btn:hover {
-    background: #75b4e7; /* Change button color on hover */
+    background: #d23854; /* Change button color on hover */
 }
 
 p {
